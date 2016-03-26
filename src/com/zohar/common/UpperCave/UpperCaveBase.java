@@ -2,7 +2,7 @@ package com.zohar.common.UpperCave;
 
 import java.awt.Component;
 
-public abstract class UpperCaveBase {
+public abstract class UpperCaveBase { 
 	protected static UpperCaveEditor e = null;
 	protected static UpperCaveFactory f = null;
 	
