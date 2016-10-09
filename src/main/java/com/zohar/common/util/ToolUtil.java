@@ -5,11 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 import javax.swing.JFrame;
 
@@ -62,6 +61,23 @@ public class ToolUtil {
         SimpleDateFormat df = new SimpleDateFormat(format);
         String result = df.format(date);
         return result;
+    }
+
+    public static Date parseStrWithFormat(String str, String format){
+        SimpleDateFormat df = new SimpleDateFormat(format);
+        try{
+            Date date = df.parse(str);
+            return date;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String parseDateStrToStrWithFormat(String str, String format1, String format2){
+        Date date = parseStrWithFormat(str, format1);
+        String str2 = parseDateWithFormat(date, format2);
+        return str2;
     }
 
 	public static void backUpFile(String filePath, String fileBak) {
@@ -142,5 +158,24 @@ public class ToolUtil {
             }
         }
         return result.toString();
+    }
+
+
+    public static void main(String[] args){
+//        String dateStr = "28/May/2016:16:22:44 +0800";
+//        Date date = parseStrWithFormat(dateStr, "dd/MMM/yyyy:HH:mm:ss Z");
+//        System.out.println(date);
+        String str = "Sun Aug 1 00:00:00 UTC 0800 2010";//带星期几的UTC日期格式
+        String dateStr = "28/May/2016:16:22:44 +0800";
+//        DateFormat df=new SimpleDateFormat("EEE MMM dd HH:mm:ss 'UTC 0800' yyyy", Locale.ENGLISH);//CST格式
+        DateFormat df=new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);//CST格式
+        Date date = null;
+        try {
+            date = df.parse(dateStr);//parse函数进行转换
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(date);//打印CST日期格式
     }
 }

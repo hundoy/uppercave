@@ -25,7 +25,7 @@ public class RegExpUtil {
 	public static List<List<String>> regFindAllByAllGroup(String regEx, String s){
 		List<List<String>> resultList = new ArrayList<List<String>>();
 		
-		Pattern pat = Pattern.compile(regEx);  
+		Pattern pat = Pattern.compile(regEx, Pattern.DOTALL);
 		Matcher mat = pat.matcher(s);
 		
 		while(mat.find()){
